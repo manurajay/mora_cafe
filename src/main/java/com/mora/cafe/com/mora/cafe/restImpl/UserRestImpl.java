@@ -20,6 +20,7 @@ public class UserRestImpl implements UserRest {
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         try {
+            System.out.println("this is the status code : " + HttpStatus.class.getName());
             return userService.signUp(requestMap);
         } catch (Exception e) {
             e.printStackTrace();
