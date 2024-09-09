@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.mora.cafe.com.mora.cafe.POJO.ERole;
 import com.mora.cafe.com.mora.cafe.POJO.Role;
 import com.mora.cafe.com.mora.cafe.POJO.User;
+import com.mora.cafe.com.mora.cafe.dao.UserDao;
 import com.mora.cafe.com.mora.cafe.dto.request.LoginUserDto;
 import com.mora.cafe.com.mora.cafe.dto.request.RegisterUserDto;
 import com.mora.cafe.com.mora.cafe.dto.response.LoginResponse;
@@ -62,15 +63,23 @@ public class AuthController {
     String jwt = jwtUtils.generateJwtToken(authentication);
     
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+    System.out.println("authorites " + userDetails.getAuthorities());
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
 
-    return ResponseEntity.ok(new LoginResponse(jwt,
-                         userDetails.getId(), 
-                         userDetails.getUsername(), 
-                         userDetails.getEmail(), 
-                         roles));
+    System.out.println("these are roles " + roles);
+    if (userRepository.findByEmail(userDetails.getEmail()).getStatus()) {
+      return ResponseEntity.ok(new LoginResponse(jwt,
+              userDetails.getId(),
+              userDetails.getUsername(),
+              userDetails.getEmail(),
+              roles));
+    } else {
+      return ResponseEntity.badRequest().body("Waiting for admin approval.");
+    }
+
+
   }
 
   @PostMapping("/signup")
@@ -123,6 +132,9 @@ public class AuthController {
     }
 
     user.setRoles(roles);
+    if (strRoles.contains("admin")) {
+      user.setStatus();
+    }
     userRepository.save(user);
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
