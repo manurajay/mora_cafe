@@ -43,7 +43,7 @@ public class JwtUtils {
             .signWith(SignatureAlgorithm.HS256, jwtSecret)
             .compact();
   }
-
+  
   private Key key() {
     return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
   }
@@ -58,16 +58,12 @@ public class JwtUtils {
       Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
       return true;
     } catch (MalformedJwtException e) {
-      System.out.println("ambo1");
       logger.error("Invalid JWT token: {}", e.getMessage());
     } catch (ExpiredJwtException e) {
-      System.out.println("ambo2");
       logger.error("JWT token is expired: {}", e.getMessage());
     } catch (UnsupportedJwtException e) {
-      System.out.println("ambo3");
       logger.error("JWT token is unsupported: {}", e.getMessage());
     } catch (IllegalArgumentException e) {
-      System.out.println("ambo4");
       logger.error("JWT claims string is empty: {}", e.getMessage());
     }
 

@@ -1,6 +1,6 @@
 package com.mora.cafe.com.mora.cafe.security.jwt;
 
-import  java.io.IOException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +25,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
       throws IOException, ServletException {
-    logger.error("Unauthorized errodddr: {}", authException.getMessage());
+    logger.error("Unauthorized error: {}", authException.getMessage());
 
     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
