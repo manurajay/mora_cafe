@@ -18,7 +18,6 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     UserDao userDao;
 
     // create a new user
@@ -56,11 +55,10 @@ public class UserServiceImpl implements UserService {
     private User getUserFromMap(Map<String, String> requestMap)  {
         User user = new User();
         user.setName(requestMap.get("name"));
-        user.setContactNumebr(requestMap.get("contactNumber"));
-        user.setEmial(requestMap.get("email"));
+        user.setContactNumber(requestMap.get("contactNumber"));
+        user.setEmail(requestMap.get("email"));
         user.setPassword(requestMap.get("password"));
-        user.setStatus("false");
-        user.setRole("user");
+        user.setStatus(false);
         return user;
     }
 }
