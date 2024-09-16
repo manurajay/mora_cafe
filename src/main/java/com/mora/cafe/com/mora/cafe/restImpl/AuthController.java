@@ -1,5 +1,6 @@
 package com.mora.cafe.com.mora.cafe.restImpl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,7 +9,6 @@ import java.util.stream.Collectors;
 import com.mora.cafe.com.mora.cafe.POJO.ERole;
 import com.mora.cafe.com.mora.cafe.POJO.Role;
 import com.mora.cafe.com.mora.cafe.POJO.User;
-import com.mora.cafe.com.mora.cafe.dao.UserDao;
 import com.mora.cafe.com.mora.cafe.dto.request.LoginUserDto;
 import com.mora.cafe.com.mora.cafe.dto.request.RegisterUserDto;
 import com.mora.cafe.com.mora.cafe.dto.response.LoginResponse;
@@ -17,21 +17,19 @@ import com.mora.cafe.com.mora.cafe.repo.RoleRepository;
 import com.mora.cafe.com.mora.cafe.repo.UserRepository;
 import com.mora.cafe.com.mora.cafe.security.jwt.JwtUtils;
 import com.mora.cafe.com.mora.cafe.security.services.UserDetailsImpl;
+import com.mora.cafe.com.mora.cafe.serviceImpl.UserService;
+import com.mora.cafe.com.mora.cafe.wrapper.UserWrapper;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -52,6 +50,8 @@ public class AuthController {
 
   @Autowired
   JwtUtils jwtUtils;
+
+  private UserService userService;
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginUserDto loginRequest) {
@@ -139,4 +139,15 @@ public class AuthController {
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
+
+  @GetMapping("/allUsers")
+  public ResponseEntity<List<UserWrapper>> getAllUsers() {
+    try {
+      return (ResponseEntity<List<UserWrapper>>) userService.allUsers();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+    return new ResponseEntity<List<UserWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
 }

@@ -13,6 +13,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @NamedQuery(name = "User.findByEmailId", query = "select u from User u where u.email=:email")
+@NamedQuery(name = "User.getAllUsers",
+        query = "select new com.mora.cafe.com.mora.cafe.wrapper.UserWrapper(u) from User u JOIN u.roles r where r.name = 'ROLE_ADMIN'")
+@NamedQuery(name = "User.getAllAdmins",
+        query = "select new com.mora.cafe.com.mora.cafe.wrapper.UserWrapper(u) from User u JOIN u.roles r where r.name = 'ROLE_USER'")
+//@NamedQuery(name = "User.deleteUser", query = "delete from User u where u.email  = :email")
+
+
 
 @Data
 @Entity
@@ -57,7 +64,7 @@ public class User implements Serializable {
     @Column(name = "status")
     private boolean status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable( name = "user_roles",
         joinColumns = @JoinColumn(name = "email"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))

@@ -5,12 +5,17 @@ import com.mora.cafe.com.mora.cafe.constants.CafeConstants;
 import com.mora.cafe.com.mora.cafe.dao.UserDao;
 import com.mora.cafe.com.mora.cafe.service.UserService;
 import com.mora.cafe.com.mora.cafe.utils.CafeUtils;
+import com.mora.cafe.com.mora.cafe.wrapper.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,7 +23,11 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     UserDao userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // create a new user
     @Override
@@ -41,6 +50,76 @@ public class UserServiceImpl implements UserService {
             return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<List<UserWrapper>> getAllUser(Map<String, String> requestMap) {
+        try {
+            if (requestMap.containsValue("ROLE_USER")) {
+                if (! userDao.getAllAdmins().isEmpty()) {
+                    return new ResponseEntity<>(userDao.getAllUsers(), HttpStatus.OK);
+                }
+            } else if (requestMap.containsValue("ROLE_ADMIN")) {
+                return new ResponseEntity<>(userDao.getAllAdmins(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // delete user by email
+    @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> deleteUsers(Map<String, String> requestMap) {
+        try {
+            if (userDao.deleteUser(requestMap.get("email")) == 1) {
+                return new ResponseEntity<>("User Deleted", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Not deleted2", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>("Not deleted3", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // approve user account
+    @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> approveAcc(Map<String, String> requestMap) {
+        try {
+             if (userDao.approveAccount(requestMap.get("email")) == 1) {
+                 return new ResponseEntity<>("Account Approved", HttpStatus.OK);
+             } else {
+                 return new ResponseEntity<>("Not Approved", HttpStatus.BAD_REQUEST);
+             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>("Failed to Approved", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    // reset password
+    @Override
+    public ResponseEntity<String> resetPassword(Map<String, String> requestMap) {
+        try {
+            User user = userDao.findByEmailId(requestMap.get("email"));
+            if (!Objects.isNull(user)) {
+                user.setPassword(passwordEncoder.encode(requestMap.get("password")));
+                userDao.save(user);
+                return new ResponseEntity<>("Reset Password Successfully", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Failed to reset password", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>("Access denied", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
     // validate the request map
     private boolean validateSignUpMap(Map<String, String> requestMap) {
