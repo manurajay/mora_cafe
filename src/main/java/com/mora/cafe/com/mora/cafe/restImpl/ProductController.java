@@ -15,7 +15,7 @@ public class ProductController implements ProductRest {
     @Autowired
     ProductService productService;
     @Override
-    public ResponseEntity<String> newProduct(Map<String, Object> requestMap) {
+    public ResponseEntity<?> newProduct(Map<String, Object> requestMap) {
         try {
             return productService.createProduct(requestMap);
         } catch (Exception ex) {
@@ -42,6 +42,16 @@ public class ProductController implements ProductRest {
             ex.printStackTrace();
         }
         return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Boolean> changeAvailable(Long id) {
+        try {
+            return productService.updateAvailable(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override

@@ -37,5 +37,18 @@ public class NewProduct {
     @Column(name = "expirationDate")
     private Date expirationDate;
 
+    public NewProduct() {}
+
+    public NewProduct(String productName, Category category, Boolean isAvailable, Date manufacturedDate, Date expirationDate) {
+        this.productName = productName;
+        this.category = category;
+        this.isAvailable = isAvailable;
+        this.manufacturedDate = manufacturedDate;
+        this.expirationDate = expirationDate;
+    }
+
+    public void setIsAvailable() {
+        this.isAvailable = !isAvailable;
+    }
 }
 
