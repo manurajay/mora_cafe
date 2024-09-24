@@ -1,13 +1,12 @@
-package com.mora.cafe.com.mora.cafe.wrapper;
+package com.mora.cafe.com.mora.cafe.POJO.Order;
 
-
-import com.mora.cafe.com.mora.cafe.POJO.Order.Order;
-import com.mora.cafe.com.mora.cafe.POJO.Product.NewProduct;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Entity
+@Data
 public class OrderItem {
 
     @Id
@@ -18,13 +17,9 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    private NewProduct product;
+    private String productName;
 
     private int quantity;
     private BigDecimal price;
-
-    // Constructors, Getters, Setters
 }
 

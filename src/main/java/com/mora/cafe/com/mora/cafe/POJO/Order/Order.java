@@ -1,7 +1,6 @@
 package com.mora.cafe.com.mora.cafe.POJO.Order;
 
 import com.mora.cafe.com.mora.cafe.POJO.User;
-import com.mora.cafe.com.mora.cafe.wrapper.OrderItem;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
