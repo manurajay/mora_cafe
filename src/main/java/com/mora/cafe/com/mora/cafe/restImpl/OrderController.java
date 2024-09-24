@@ -19,9 +19,9 @@ public class OrderController implements OrderRest {
     @Autowired
     OrderService orderService;
     @Override
-    public ResponseEntity<?> newProduct(OrderRequest orderRequest) {
+    public ResponseEntity<?> newOrder(OrderRequest orderRequest) {
         try {
-            orderService.createProduct(orderRequest);
+            orderService.createOrder(orderRequest);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -29,9 +29,9 @@ public class OrderController implements OrderRest {
     }
 
     @Override
-    public ResponseEntity<?> getAllProduct() {
+    public ResponseEntity<?> getAllOrder() {
         try {
-            orderService.getAllProducts();
+            orderService.getAllOrders();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -39,9 +39,9 @@ public class OrderController implements OrderRest {
     }
 
     @Override
-    public ResponseEntity<?> updateProduct(OrderRequest orderRequest) {
+    public ResponseEntity<?> updateOrder(Map<String, Object> orderRequest) {
         try {
-            orderService.updateProduct(orderRequest);
+            orderService.updateOrder(orderRequest);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -49,12 +49,24 @@ public class OrderController implements OrderRest {
     }
 
     @Override
-    public ResponseEntity<?> deleteProduct(Map<String, Long> requestMap) {
+    public ResponseEntity<?> deleteOrder(Map<String, Long> requestMap) {
         try {
-            orderService.deleteProduct(requestMap);
+            orderService.deleteOrder(requestMap);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<?> getOrder(Integer id) {
+        try {
+            orderService.getOrderById(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 }

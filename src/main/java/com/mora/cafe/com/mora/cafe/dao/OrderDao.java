@@ -13,4 +13,12 @@ public interface OrderDao extends JpaRepository<Order, Integer> {
     @Query("SELECT new com.mora.cafe.com.mora.cafe.wrapper.OrderWrapper(o.id, o.user.username, o.orderItems, o.status, o.totalAmount, o.orderDate, o.updatedDate) FROM Order o")
     List<OrderWrapper> getAllOrders();
 
+    Order getOrderById(Object id);
+
+    Order getOderByEmailAndOrderId(String email);
+
+    Order getOrderByUserId(int userId);
+
+
+
 }

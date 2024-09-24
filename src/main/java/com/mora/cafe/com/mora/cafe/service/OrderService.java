@@ -1,17 +1,18 @@
 package com.mora.cafe.com.mora.cafe.service;
 
+import com.mora.cafe.com.mora.cafe.POJO.Order.Order;
 import com.mora.cafe.com.mora.cafe.dto.request.OrderRequest;
-import com.mora.cafe.com.mora.cafe.dto.response.OrderResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
 public interface OrderService {
-    ResponseEntity<?> createProduct(OrderRequest orderRequest);
-    ResponseEntity<?> getAllProducts();
-    ResponseEntity<?> updateProduct(OrderRequest orderRequest);
-    ResponseEntity<?> deleteProduct(Map<String, Long> requestMap);
+    ResponseEntity<?> createOrder(OrderRequest orderRequest);
+    ResponseEntity<?> getAllOrders();
+    ResponseEntity<?> updateOrder(Map<String, Object> orderRequest);
+    ResponseEntity<?> updateOrderItem(Map<String, Object> orderRequest);
+    ResponseEntity<?> deleteOrder(Map<String, Long> requestMap);
+    ResponseEntity<Order> getOrderById(Integer requestMap);
 }

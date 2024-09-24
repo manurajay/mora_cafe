@@ -12,14 +12,17 @@ import java.util.Map;
 @RequestMapping(path = "order")
 public interface OrderRest {
     @PostMapping(path = "/")
-    public ResponseEntity<?> newProduct(@Valid @RequestBody OrderRequest orderRequest);
+    public ResponseEntity<?> newOrder(@Valid @RequestBody OrderRequest orderRequest);
 
     @GetMapping(path = "/")
-    public ResponseEntity<?> getAllProduct();
+    public ResponseEntity<?> getAllOrder();
 
     @PutMapping(path = "/")
-    public ResponseEntity<?> updateProduct(@Valid @RequestBody OrderRequest orderRequest);
+    public ResponseEntity<?> updateOrder(@Valid @RequestBody Map<String, Object> orderRequest);
 
     @DeleteMapping(path = "/")
-    public ResponseEntity<?> deleteProduct(@Valid @RequestBody Map<String, Long> requestMap);
+    public ResponseEntity<?> deleteOrder(@Valid @RequestBody Map<String, Long> requestMap);
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable Integer id);
 }
