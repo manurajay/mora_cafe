@@ -1,6 +1,6 @@
 package com.mora.cafe.dao;
 
-import com.mora.cafe.POJO.Category.Category;
+import com.mora.cafe.pojo.Category.Category;
 import com.mora.cafe.wrapper.CategoryWrapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

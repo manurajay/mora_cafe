@@ -1,6 +1,6 @@
 package com.mora.cafe.dao;
 
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.User;
 import com.mora.cafe.wrapper.UserWrapper;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

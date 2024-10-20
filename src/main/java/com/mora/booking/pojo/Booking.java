@@ -1,14 +1,13 @@
-package com.mora.booking.models;
+package com.mora.booking.pojo;
 
-import com.mora.booking.models.common.bookingStatus;
-import com.mora.cafe.POJO.User;
+import com.mora.booking.pojo.common.BookingStatus;
+import com.mora.cafe.pojo.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @DynamicUpdate
@@ -22,26 +21,26 @@ public class Booking {
     private int bookingId;
 
     @NotBlank
-    @Column(name = "numberOfTickets")
+    @Column(name = "numberOfTickets", nullable = false)
     private int numberOfTickets;
 
     @NotBlank
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private LocalDateTime date;
 
     @NotBlank
     @Column(name = "bookingStatus")
-    private bookingStatus bookingStatus;
+    private BookingStatus bookingStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_id", nullable = false)
+    private Admin user;
 
     @ManyToOne
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    public Booking(int bookingId, int numberOfTickets, LocalDateTime date, com.mora.booking.models.common.bookingStatus bookingStatus, User user, Event event) {
+    public Booking(int bookingId, int numberOfTickets, LocalDateTime date, com.mora.booking.pojo.common.BookingStatus bookingStatus, Admin user, Event event) {
         this.bookingId = bookingId;
         this.numberOfTickets = numberOfTickets;
         this.date = date;
@@ -79,11 +78,11 @@ public class Booking {
         this.date = date;
     }
 
-    public com.mora.booking.models.common.bookingStatus getBookingStatus() {
+    public com.mora.booking.pojo.common.BookingStatus getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(com.mora.booking.models.common.bookingStatus bookingStatus) {
+    public void setBookingStatus(com.mora.booking.pojo.common.BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
 
@@ -91,7 +90,7 @@ public class Booking {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Admin user) {
         this.user = user;
     }
 

@@ -1,6 +1,6 @@
 package com.mora.cafe.serviceImpl;
 
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.User;
 import com.mora.cafe.constants.CafeConstants;
 import com.mora.cafe.dao.UserDao;
 import com.mora.cafe.service.UserService;

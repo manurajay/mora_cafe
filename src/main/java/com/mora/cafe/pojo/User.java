@@ -1,6 +1,6 @@
-package com.mora.cafe.POJO;
+package com.mora.cafe.pojo;
 
-import com.mora.booking.models.Booking;
+import com.mora.booking.pojo.Booking;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

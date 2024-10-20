@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.mora.cafe.POJO.ERole;
-import com.mora.cafe.POJO.Role;
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.ERole;
+import com.mora.cafe.pojo.Role;
+import com.mora.cafe.pojo.User;
 import com.mora.cafe.dto.request.LoginUserDto;
 import com.mora.cafe.dto.request.RegisterUserDto;
 import com.mora.cafe.dto.response.LoginResponse;

@@ -1,6 +1,6 @@
 package com.mora.cafe.serviceImpl;
 
-import com.mora.cafe.POJO.Category.Category;
+import com.mora.cafe.pojo.Category.Category;
 import com.mora.cafe.dao.CategoryDao;
 import com.mora.cafe.service.CategoryService;
 import com.mora.cafe.wrapper.CategoryWrapper;

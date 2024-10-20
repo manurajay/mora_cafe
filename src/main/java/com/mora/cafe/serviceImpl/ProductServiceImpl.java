@@ -1,7 +1,7 @@
 package com.mora.cafe.serviceImpl;
 
-import com.mora.cafe.POJO.Category.Category;
-import com.mora.cafe.POJO.Product.NewProduct;
+import com.mora.cafe.pojo.Category.Category;
+import com.mora.cafe.pojo.Product.NewProduct;
 import com.mora.cafe.dao.ProductDao;
 import com.mora.cafe.service.ProductService;
 import com.mora.cafe.wrapper.ProductWrapper;

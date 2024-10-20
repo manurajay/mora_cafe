@@ -1,7 +1,7 @@
-package com.mora.cafe.POJO.Product;
+package com.mora.cafe.pojo.Product;
 
 
-import com.mora.cafe.POJO.Category.Category;
+import com.mora.cafe.pojo.Category.Category;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;

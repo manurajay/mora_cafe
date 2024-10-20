@@ -1,6 +1,6 @@
 package com.mora.cafe.wrapper;
 
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.User;
 import lombok.Data;
 
 @Data

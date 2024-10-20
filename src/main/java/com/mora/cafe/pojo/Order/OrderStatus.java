@@ -1,4 +1,4 @@
-package com.mora.cafe.POJO.Order;
+package com.mora.cafe.pojo.Order;
 
 public enum OrderStatus {
     PENDING,

@@ -1,7 +1,7 @@
 package com.mora.cafe.dao;
 
-import com.mora.cafe.POJO.Category.Category;
-import com.mora.cafe.POJO.Product.NewProduct;
+import com.mora.cafe.pojo.Category.Category;
+import com.mora.cafe.pojo.Product.NewProduct;
 import com.mora.cafe.wrapper.ProductWrapper;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

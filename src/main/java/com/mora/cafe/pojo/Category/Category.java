@@ -1,6 +1,6 @@
-package com.mora.cafe.POJO.Category;
+package com.mora.cafe.pojo.Category;
 
-import com.mora.cafe.POJO.Product.NewProduct;
+import com.mora.cafe.pojo.Product.NewProduct;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

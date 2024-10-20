@@ -1,7 +1,7 @@
 package com.mora.cafe.repo;
 
-import com.mora.cafe.POJO.ERole;
-import com.mora.cafe.POJO.Role;
+import com.mora.cafe.pojo.ERole;
+import com.mora.cafe.pojo.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

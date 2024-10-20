@@ -2,8 +2,8 @@ package com.mora.cafe.restImpl;
 
 import com.itextpdf.text.log.Logger;
 import com.itextpdf.text.log.LoggerFactory;
-import com.mora.cafe.POJO.User;
-import com.mora.cafe.POJO.SecUser;
+import com.mora.cafe.pojo.User;
+import com.mora.cafe.pojo.SecUser;
 import com.mora.cafe.serviceImpl.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

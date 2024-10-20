@@ -1,8 +1,8 @@
 package com.mora.cafe.dto.response;
 
-import com.mora.cafe.POJO.Order.OrderItem;
-import com.mora.cafe.POJO.Order.OrderStatus;
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.Order.OrderItem;
+import com.mora.cafe.pojo.Order.OrderStatus;
+import com.mora.cafe.pojo.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.mora.cafe.wrapper;
 
-import com.mora.cafe.POJO.Category.Category;
+import com.mora.cafe.pojo.Category.Category;
 import lombok.Data;
 
 import java.util.Date;

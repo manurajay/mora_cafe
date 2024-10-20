@@ -1,7 +1,7 @@
 package com.mora.cafe.repo;
 
 
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

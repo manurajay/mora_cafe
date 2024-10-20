@@ -1,4 +1,4 @@
-package com.mora.cafe.POJO;
+package com.mora.cafe.pojo;
 
 import jakarta.persistence.*;
 import lombok.Data;

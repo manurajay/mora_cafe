@@ -1,6 +1,6 @@
 package com.mora.cafe.dto.request;
 
-import com.mora.cafe.POJO.Order.OrderItem;
+import com.mora.cafe.pojo.Order.OrderItem;
 import lombok.Data;
 
 import java.math.BigDecimal;

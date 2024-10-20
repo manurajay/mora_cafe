@@ -1,11 +1,11 @@
-package com.mora.booking.models;
+package com.mora.booking.pojo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Entity
 @Table(name = "events")
@@ -34,6 +34,8 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private List<Booking> bookings;
+
+    private final ReentrantLock lock = new ReentrantLock();
 
     public Event(int eventId, String eventName, LocalDateTime eventDate, int totalCapacity) {
         this.eventId = eventId;
@@ -103,5 +105,39 @@ public class Event {
                 ", totalCapacity=" + totalCapacity +
                 ", remainingTickets=" + remainingTickets +
                 '}';
+    }
+
+    // add tickets ( vendor )
+    public void addTicket() {
+        lock.lock();
+        try {
+            if (remainingTickets < totalCapacity) {
+                remainingTickets++;
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    // book tickets ( consumer )
+    public boolean bookTicket() {
+        lock.lock();
+        try {
+            if (remainingTickets > 0) {
+                remainingTickets--;
+                return true;
+            }
+            return false;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void releaseTickets(int numberOfTickets) {
+        this.remainingTickets += numberOfTickets;
+    }
+
+    public void reduceRemainingTickets(int numberOfTickets) {
+        this.remainingTickets -= numberOfTickets;
     }
 }

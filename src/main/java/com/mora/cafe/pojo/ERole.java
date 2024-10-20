@@ -1,4 +1,4 @@
-package com.mora.cafe.POJO;
+package com.mora.cafe.pojo;
 
 public enum ERole {
     ROLE_USER,

@@ -1,7 +1,7 @@
 package com.mora.cafe.wrapper;
 
-import com.mora.cafe.POJO.Order.OrderItem;
-import com.mora.cafe.POJO.Order.OrderStatus;
+import com.mora.cafe.pojo.Order.OrderItem;
+import com.mora.cafe.pojo.Order.OrderStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.mora.cafe.security.services;
 
-import com.mora.cafe.POJO.User;
+import com.mora.cafe.pojo.User;
 import com.mora.cafe.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
