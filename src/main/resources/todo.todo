@@ -1,0 +1,6 @@
+create mapping for user object into admin and consumer using wrapper class
+
+setup booking bool instead of ticket pool, tickets can connect with a bookings
+
+create configuration setup
+
